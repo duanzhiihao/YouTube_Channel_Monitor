@@ -62,10 +62,11 @@ def channel_list(cid):
     '''
     ytb0 = ytbAPI()
     ytb0.scope('channels')
-    ytb0.part('topicDetails','snippet', 'contentDetails','statistics')
+    ytb0.part('snippet', 'contentDetails','statistics')
     ytb0.id(cid)
     ytb0.key()
     response = ytb0.GET()
+    print(response)
 
     re_map = {}
     if 'error' in response:
@@ -217,9 +218,9 @@ def top_videos(num=10, after=None, cid='all', du='any'):
 
 def video_list(vid, *args):
     '''
-    vid: str, video id
-    *args: parts of request
-    return: dict, json file
+    :param vid: str, video id
+    :param *args: parts of request
+    :return responese['items'][0]: dict, json file
     '''
     ytb0 = ytbAPI()
     ytb0.scope('videos')
@@ -357,3 +358,90 @@ def uploaded_viodeos(cid, time):
         for item in response['items']:
             idlist.append(item['id']['videoId'])
     return idlist
+
+
+def liked_videos(token):
+    '''
+    return the list of video ids of a channel's liked videos
+    
+    :param token: str, the access token of the authed user
+    :return liked: list of str, video ids
+    '''
+    ytb0 = ytbAPI()
+    ytb0.scope('channels')
+    ytb0.part('contentDetails')
+    ytb0.mine()
+    ytb0.access_token(token)
+    response = ytb0.GET()
+
+    l = response['items'][0]['contentDetails']['relatedPlaylists']['likes']
+    ytb0 = ytbAPI()
+    ytb0.scope('playlistItems')
+    ytb0.part('snippet')
+    ytb0.maxResults(50)
+    ytb0.playlistId(l)
+    ytb0.access_token(token)
+    response = ytb0.GET()
+
+    liked = []
+    for item in response['items']:
+        liked.append(item['snippet']['resourceId']['videoId'])
+    while 'nextPageToken' in response:
+        ytb0.pageToken(response['nextPageToken'])
+        response = ytb0.GET()
+        for item in response['items']:
+            liked.append(item['snippet']['resourceId']['videoId'])
+    
+    return liked
+
+
+def all_playlists(cid):
+    '''
+    retrive the 2018 playlist ids in the channel
+    :param cid: str, the channel id
+    :return lists: list of str, the playlist ids
+    '''
+    ytb0=ytbAPI()
+    ytb0.scope('playlists')
+    ytb0.part('snippet')
+    ytb0.channelId(cid)
+    ytb0.maxResults(50)
+    ytb0.key()
+    response = ytb0.GET()
+
+    lists = []
+    for item in response['items']:
+        if item['snippet']['publishedAt'][:4] == '2018':
+            lists.append(item['id'])
+    while 'nextPageToken' in response:
+        ytb0.pageToken(response['nextPageToken'])
+        response = ytb0.GET()
+        for item in response['items']:
+            if item['snippet']['publishedAt'][:4] == '2018':
+                lists.append(item['id'])
+    
+    return lists
+
+
+def lists_to_vids(pls):
+    '''
+    :param pls: list of str, a list contain playlist ids
+    :return vids: list of str, a list contain video ids
+    '''
+    vids = []
+    for plid in pls:
+        ytb0 = ytbAPI()
+        ytb0.scope('playlistItems')
+        ytb0.part('contentDetails')
+        ytb0.playlistId(plid)
+        ytb0.maxResults(50)
+        ytb0.key()
+        response = ytb0.GET()
+        for video in response['items']:
+            tmp = video['contentDetails']
+            if not 'videoPublishedAt' in tmp:
+                continue
+            if tmp['videoPublishedAt'][:4] == '2018':
+                vids.append(video['contentDetails']['videoId'])
+
+    return vids
