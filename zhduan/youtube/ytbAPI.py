@@ -38,7 +38,7 @@ CATEGORY[44] = 'Trailers'
 class ytbAPI(object):
 
     DATA_V3_BASE = 'https://www.googleapis.com/youtube/v3/'
-    __API_KEY = "AIzaSyDte8uWYpENQDqvOp4qY0SO35SWsI5PgCU" # 
+    __API_KEY = "your google api key" # 
 
     def __init__(self):
         self.keyStr = '&key=' + self.__API_KEY
