@@ -1,0 +1,90 @@
+{% extends "youtube.html" %}
+
+{% block content2show %}
+<div class="w3-container w3-card w3-light-grey w3-margin-left w3-animate-opacity">
+
+<div>
+    <h2 class="b w3-text-red">Top 10 channels</h2>
+</div>
+
+<div onclick="showFilter('topFilter')"
+class="w3-button w3-block w3-left-align w3-opacity w3-border-bottom">
+    Filter <i class="fa fa-caret-down"></i>
+</div>
+<script>
+function showFilter(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+<div class="w3-container w3-hide w3-border-bottom w3-padding-16"
+    id="topFilter">
+<form action="{% url 'ytbTopChannels' %}" method="POST">
+{% csrf_token %}
+    <div>
+    <div class="w3-quarter w3-left-align w3-margin-left">
+        <span class="w3-opacity">Order</span><br>
+        <input class="w3-radio" type="radio" name="order" value="viewCount">
+        View count<br>
+        <input class="w3-radio" type="radio" name="order" value="videoCount" checked>
+        Video count<br>
+    </div>
+
+    <div class="w3-quarter">
+        <span class="w3-opacity">Location</span><br>
+        <select class="w3-select w3-border w3-light-grey w3-opacity" name="location">
+            <option val="0">All</option>
+        </select>
+    </div>
+    </div>
+    <div class="w3-container w3-right-align">
+        <input class="w3-button w3-red w3-card"
+            type="submit" value="Top channels">
+    </div>
+
+</form>
+</div>
+
+
+<table class="w3-table w3-striped w3-white w3-margin-top" >
+    {% for c in channels %}
+        <tr>
+            <td style="vertical-align: middle"><h4>{{c.rank}}</h4></td>
+            <td style="vertical-align: middle">
+
+                <a href="https://www.youtube.com/channel/{{c.id.channelId}}">
+                <img class="w3-card" src={{c.snippet.thumbnails.default.url}}
+                alt="Img failed"></a>
+                </td>
+
+            <td>
+              <td style="width: 420px;">
+                <a href="https://www.youtube.com/channel/{{c.id.channelId}}"
+                    style="text-decoration: none;">
+                <span>{{c.snippet.title}}</span><br>
+                </a>
+                <span class="w3-small w3-opacity">Published on
+                    {{c.snippet.publishedAt}}</span><br>
+                <span>Total views: {{c.views}}</span><br>
+                <span>Total videos: {{c.videos}}</span><br>
+                <span>Total subscribers: {{c.subs}}</span><br>
+            </td>
+          </td>
+
+        </tr>
+    {% endfor %}
+</table>
+
+{% if err_msg %}
+<div class="w3-red">
+    <p>Error: {{err_msg}}</p>
+</div>
+{% endif %}
+
+</div>
+{% endblock %}

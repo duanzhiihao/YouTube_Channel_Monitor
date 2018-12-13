@@ -1,0 +1,21 @@
+{% extends "youtube.html" %}
+ 
+{% block content2show %}
+<div class="w3-container w3-card w3-light-grey w3-margin-left w3-animate-opacity">
+
+<h4 class="w3-center">My liked videos charts</h4>
+
+<div class="w3-panel">
+<img class="w3-card" style="width: 550px;height: 400px;"
+    src="http://www.zhduan.com/static/images/pie_{{token10}}.png" alt="Img failed">
+
+{% if err_msg %}
+<div class="w3-red">
+    <p>Error: {{err_msg}}</p>
+</div>
+{% endif %}
+
+</div>
+
+</div>
+{% endblock %}

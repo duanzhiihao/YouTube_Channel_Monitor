@@ -1,0 +1,73 @@
+{% extends "youtube.html" %}
+ 
+{% block content2show %}
+<div class="w3-container w3-card w3-light-grey w3-margin-left w3-animate-opacity">
+
+<h4 class="w3-center">Sample Video Statistics: Despacito</h4>
+<div class="w3-panel">
+
+<div>
+<table class="w3-table w3-striped w3-white w3-margin-top" >
+<tr>
+    <td style="vertical-align: middle">
+        <a href="https://www.youtube.com/watch?v={{id}}">
+        <img class="w3-card" src={{snippet.thumbnails.default.url}}
+        alt="Img failed"></a></td>
+    <td>
+        <a href="https://www.youtube.com/watch?v={{id}}"
+            style="text-decoration: none;">
+        <span>{{snippet.title}}</span><br>
+        <span class="w3-small w3-opacity">Published on {{snippet.publishedAt}}</span><br>
+        <span>Total views: {{statistics.viewCount}}</span><br>
+        <span>Total likes: {{statistics.likeCount}}</span><br>
+        <span>Total dislikes: {{statistics.dislikeCount}}</span><br>
+        <span>Total comments: {{statistics.commentCount}}</span><br>
+        </a>
+    </td>
+</tr>
+</table>
+</div>
+
+<div>
+<img class="w3-card" style="width: 550px;height: 300px;"
+    src="http://www.zhduan.com/static/images/line_view_kJQP7kiw5Fk.png" alt="Img failed">
+
+<img class="w3-card" style="width: 550px;height: 300px;"
+    src="http://www.zhduan.com/static/images/line_dview_kJQP7kiw5Fk.png" alt="Img failed">
+
+    
+<img class="w3-card" style="width: 550px;height: 300px;"
+    src="http://www.zhduan.com/static/images/line_like_kJQP7kiw5Fk.png" alt="Img failed">
+
+
+<img class="w3-card" style="width: 550px;height: 300px;"
+    src="http://www.zhduan.com/static/images/line_dlike_kJQP7kiw5Fk.png" alt="Img failed">
+
+    
+<img class="w3-card" style="width: 550px;height: 300px;"
+    src="http://www.zhduan.com/static/images/line_dislike_kJQP7kiw5Fk.png" alt="Img failed">
+
+
+<img class="w3-card" style="width: 550px;height: 300px;"
+    src="http://www.zhduan.com/static/images/line_ddislike_kJQP7kiw5Fk.png" alt="Img failed">
+
+    
+<img class="w3-card" style="width: 550px;height: 300px;"
+    src="http://www.zhduan.com/static/images/line_comment_kJQP7kiw5Fk.png" alt="Img failed">
+
+
+<img class="w3-card" style="width: 550px;height: 300px;"
+    src="http://www.zhduan.com/static/images/line_dcomment_kJQP7kiw5Fk.png" alt="Img failed">
+</div>
+
+
+{% if err_msg %}
+<div class="w3-red">
+    <p>Error: {{err_msg}}</p>
+</div>
+{% endif %}
+
+</div>
+
+</div>
+{% endblock %}

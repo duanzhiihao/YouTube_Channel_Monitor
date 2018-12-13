@@ -11,6 +11,10 @@ urlpatterns = [
     path('myytb', views.my_youtube_stats, name='myYoutubePage'),
     path('topvideo', views.ytb_top_video, name='ytbTopVideos'),
     path('topfilter', views.ytb_top_filter, name='ytbTopFilter'),
+    path('aboutus', views.ytb_aboutus, name='ytbAboutUs'),
+    path('topch', views.ytb_top_channel, name='ytbTopChannels'),
+    path('mylikepie', views.ytb_my_like, name='myLikePage'),
+    path('despacito', views.ytb_vstats_sample, name='ytbVstatsSample'),
 
     path('oath', include('social_django.urls', namespace='social')),
 ]

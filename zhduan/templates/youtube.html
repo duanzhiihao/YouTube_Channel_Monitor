@@ -9,21 +9,23 @@
     <link rel="bookmark" href="http://www.zhduan.com/static/images/bu.ico"/>
     <link rel="stylesheet" type="text/css" href="http://www.zhduan.com/static/style/zhduan.css">
     <link rel="stylesheet" type="text/css" href="http://www.zhduan.com/static/style/w3.css">
-    <link rel="stylesheet" 
+    <link rel="stylesheet"
     href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" 
+    <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
     /* body,h1 {font-family: "Montserrat", sans-serif} */
+    h1.a {font-family: Roboto, sans-serif; font-size: 50px; font-weight:bolder;}
+    h2.b {font-family: Arial, sans-serif;}
     </style>
-    
+
 </head>
 
 <body class="w3-white" style="text-align:center;margin: 0 auto; max-width:860px">
 <div class="">
 
-<div class="w3-container w3-red w3-section">
-    <h1 class="w3-xxxlarge">YouTube Analyzer | EC601</h1>
+<div class="w3-container w3-red w3-section w3-padding-16">
+    <h1 class="a" >YouTube Analyzer | EC601</h1>
 </div>
 
 <div class="w3-container" >
@@ -47,15 +49,73 @@
 <div class="w3-row w3-margin-top " style="margin-bottom:128px">
 
 <div class="w3-quarter w3-bar-block">
-    <a href="{% url 'myYoutubePage' %}" class="w3-bar-item w3-button w3-border-bottom w3-border-top">
-        My YouTube</a>
-    <a href="{% url 'ytbTopVideos' %}" class="w3-bar-item w3-button w3-border-bottom">
-        Top videos</a>
-    <a href="#" class="w3-bar-item w3-button w3-border-bottom">
-        My channel</a>
+  <style>
+  .button {
+    display: inline-block;
+    border-radius: 1px;
+    background-color: #ffffff;
+    border: none;
+    color: #000000;
+    text-align: center;
+    font-size: 16px;
+    padding: 30px;
+    width: 40px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 0px;
+  }
+
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -18px;
+    transition: 0.5s;
+  }
+
+  .button:hover span {
+    padding-right: 15px;
+  }
+
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  </style>
+
+    <button onclick="myFunction('Demo1')" class="button w3-border-top w3-bar-item w3-border-bottom"><span>
+        My YouTube </span></button>
+        <div id="Demo1" class="w3-hide w3-red">
+        <a href="{% url 'myYoutubePage' %}" class="w3-button w3-block w3-left-align w3-border-bottom" style="font-size:13px">my account info</a>
+        <a href="{% url 'myLikePage' %}" class="w3-button w3-block w3-left-align w3-border-bottom" style="font-size:13px">liked videos</a>
+        <a href="#" class="w3-button w3-block w3-left-align w3-border-bottom">...</a>
+        </div>
+
+    <button onclick="myFunction('Demo2')" class="button w3-bar-item w3-border-bottom"><span>
+        Top Charts   <!-- <i class="fa fa-caret-down"></i> --> </span></button>
+        <div id="Demo2" class="w3-hide w3-red">
+        <a href="{% url 'ytbTopVideos' %}" class="w3-button w3-block w3-left-align w3-border-bottom" style="font-size:13px">Top 10 viewed videos</a>
+        <a href="{% url 'ytbTopChannels' %}" class="w3-button w3-block w3-left-align w3-border-bottom" style="font-size:13px">Top 10 channels</a>
+        </div>
+
+    <button onclick="myFunction('Demo3')" class="button w3-bar-item w3-border-bottom"><span>
+        Video stats  <!-- <i class="fa fa-caret-down"></i> --> </span></button>
+        <div id="Demo3" class="w3-hide w3-red">
+        <a href="{% url 'ytbVstatsSample' %}" class="w3-button w3-block w3-left-align w3-border-bottom" style="font-size:13px">A sample</a>
+        <a href="#" class="w3-button w3-block w3-left-align w3-border-bottom">...</a>
+        </div>
+
     <a href="{% url 'ChannelInfoPage' %}" class="w3-bar-item w3-button w3-border-bottom">
-        Channel info</a>
-    <a href="#" class="w3-bar-item w3-button w3-border-bottom">
+        Channel stats</a>
+    <a href="{% url 'ytbAboutUs' %}" class="w3-bar-item w3-button w3-border-bottom">
         About us</a>
 </div>
 
@@ -65,19 +125,21 @@
 </div>
 
 </div>
+<script>
+function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
 
-
-{% if user.is_authenticated %}
-{% else %}
-<div class="w3-container w3-white w3-section">
-        <p class="w3-large">Please sign in first</p>
-    </div>
-{% endif %}
-
-<footer class="w3-container w3-light-grey w3-center w3-opacity"> 
-    <p class="w3-medium">e-mail: duanzh@bu.edu</p>
-    <p class="w3-medium">Web page design using 
-        <a href="https://www.w3schools.com/w3css/default.asp" 
+<footer class="w3-container w3-light-grey w3-center w3-opacity">
+    <p class="w3-medium">e-mail: duanzh@bu.edu   shiluwu@bu.edu   sjq@bu.edu</p>
+    <p class="w3-medium">Web page design using
+        <a href="https://www.w3schools.com/w3css/default.asp"
         class="w3-hover-text-green">w3.css</a>
     </p>
 </footer>

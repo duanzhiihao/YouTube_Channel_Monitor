@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'django_crontab',
+    'youtube.apps.YoutubeConfig',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +153,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE =  ['https://www.googleapis.com/auth/youtube',
                                     'https://www.googleapis.com/auth/yt-analytics-monetary.readonly',
                                     'https://www.googleapis.com/auth/yt-analytics.readonly'
                                     ]
+
+CRONJOBS = [
+    # ('* * * * *', 'youtube.youtube_daily.test', '>>/home/test.log'),
+    ('0 0 * * * *', 'youtube.youtube_daily.despacito_daily', '>>/home/despacito.log'),
+]

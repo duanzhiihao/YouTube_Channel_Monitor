@@ -1,13 +1,13 @@
 {% extends "youtube.html" %}
- 
+
 {% block content2show %}
 <div class="w3-container w3-card w3-light-grey w3-margin-left w3-animate-opacity">
 
 <div>
-    <h2>Top viewed videos</h2>
+    <h2 class="b w3-text-red">Top 10 videos</h2>
 </div>
 
-<div onclick="showFilter('topFilter')" 
+<div onclick="showFilter('topFilter')"
 class="w3-button w3-block w3-left-align w3-opacity w3-border-bottom">
     Filter <i class="fa fa-caret-down"></i>
 </div>
@@ -16,7 +16,7 @@ function showFilter(id) {
     var x = document.getElementById(id);
     if (x.className.indexOf("w3-show") == -1) {
         x.className += " w3-show";
-    } else { 
+    } else {
         x.className = x.className.replace(" w3-show", "");
     }
 }
@@ -97,10 +97,10 @@ function showFilter(id) {
     </div>
     </div>
     <div class="w3-container w3-right-align">
-        <input class="w3-button w3-red w3-card" 
+        <input class="w3-button w3-red w3-card"
             type="submit" value="Top videos">
     </div>
-    
+
 </form>
 </div>
 
@@ -111,15 +111,15 @@ function showFilter(id) {
             <td style="vertical-align: middle"><h4>{{v.rank}}</h4></td>
             <td style="vertical-align: middle">
                 <a href="https://www.youtube.com/watch?v={{v.id.videoId}}">
-                <img class="w3-card" src={{v.snippet.thumbnails.default.url}} 
+                <img class="w3-card" src={{v.snippet.thumbnails.default.url}}
                 alt="Img failed"></a></td>
             <td>
                 <a href="https://www.youtube.com/watch?v={{v.id.videoId}}"
                     style="text-decoration: none;">
                 <span>{{v.snippet.title}}</span><br>
                 </a>
-                <p class="w3-small w3-opacity">Published on 
-                    {{v.snippet.publishedAt}}</p>
+                <span class="w3-small w3-opacity">Published on
+                    {{v.snippet.publishedAt}}</span><br>
                 <span>Total views: {{v.views}}</span><br>
             </td>
         </tr>

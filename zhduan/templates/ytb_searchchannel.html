@@ -7,8 +7,8 @@
     {% csrf_token %}
     <h4 class="w3-center">Search channel</h4>
     <div>
-    <input class="w3-input w3-border w3-threequarter" name="cid" 
-        type="text" placeholder="Enter the channel id">
+    <input class="w3-input w3-border w3-threequarter" name="keyword" 
+        type="text" placeholder="Enter the channel title">
     <input class="w3-button w3-quarter w3-red" 
         type="submit" value="Submit">
     </div>
@@ -42,6 +42,10 @@
         <td>{{ch_videoCount}}</td>
     </tr>
 </table>
+<img class="w3-card" style="width: 550px;height: 400px;"
+    src="http://www.zhduan.com/static/images/pie_{{ch_id}}.png" alt="Img failed">
+<img class="w3-card" style="width: 550px;height: 400px;"
+    src="http://www.zhduan.com/static/images/heat_{{ch_id}}.png" alt="Img failed">
 
 {% if err_msg %}
 <div class="w3-red">
