@@ -28,7 +28,7 @@ python manage.py runserver 0:80
 or
 python manage.py runserver
 ```
-3. You are done! Open your browser and enter ```localhost```(python manage.py runserver 0:80) or ```localhost:8000```(python manage.py runserver), then you should see a UI of the website.
+3. You are all set! Open your browser and enter ```localhost```(python manage.py runserver 0:80) or ```localhost:8000```(python manage.py runserver), then you should see a UI of the website.
 
 4. Open ```/zhduan/youtube/ytbAPI.py```, enter your Google API Key at ```line 7```. For how to get a Google API Key, you can read the [official doc](https://cloud.google.com/docs/authentication/api-keys?hl=en&authuser=0&visit_id=1541530248023-3715642940710334230&rd=1), or create API key [here](https://console.cloud.google.com/apis/credentials).
 
@@ -51,7 +51,7 @@ pip install urllib3
 from .ytbAPI import ytbAPI
 ```
 
-4. You are done!
+4. You are all set!
 
 5. Here is an example of getting top 10 viewed video in YouTube in the history. There are more in ```youtube_lib.py```.
 ```python
