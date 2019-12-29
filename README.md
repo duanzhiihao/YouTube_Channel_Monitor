@@ -1,10 +1,8 @@
-# youtubeAnalyzeProject
+# YouTube channel analyzer
 BU EC601 Project
 
-# Our Web App
+# Web application
 www.zhduan.com/youtube
-
-It is still in progress.
 
 # Our codes
 Our whole project codes are in folder ```zhduan```. There are two ways you can reuse our codes.
