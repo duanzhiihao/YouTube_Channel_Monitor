@@ -1,5 +1,5 @@
 # YouTube channel analyzer
-BU EC601 Project
+Course project for EC601 at BU.
 
 # Web application
 www.zhduan.com/youtube
